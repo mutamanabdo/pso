@@ -1,0 +1,16 @@
+# Replace development versions with stable ones
+lit==19.1.6  # was 19.1.7.dev0
+Mako==1.3.5  # was 1.3.9.dev0
+validate-pyproject==0.23  # was 0.23.post1.dev0+gf45606b.d20250111
+
+# Downgrade for Python 3.9 compatibility
+contourpy==1.2.1  # was 1.3.1
+matplotlib==3.9.2  # was 3.10.0 (if needed; test 3.10.0 first)
+numpy==1.26.4  # was 2.2.3
+pillow==10.4.0  # was 11.1.0
+pydantic==1.10.13  # was 2.10.6
+
+# Optional removals (if not needed)
+# PyBluez==0.30
+# wxPython==4.2.2
+# evdev==1.9.0
