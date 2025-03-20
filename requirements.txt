@@ -12,7 +12,7 @@ autocommand==2.2.2
 bcrypt==4.2.1
 beautifulsoup4==4.12.3
 blinker==1.8.2
-Brlapi==0.8.6
+
 Brotli==1.1.0
 build==1.2.2
 cachetools==5.5.0
