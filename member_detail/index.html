@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الأعضاء</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: #1a202c;
+            color: #e2e8f0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            overflow-x: hidden;
+            direction: rtl;
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .hero {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #edf2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #4a5568;
+            border: 4px solid #fff;
+            transition: transform 0.3s ease;
+        }
+        .avatar:hover {
+            transform: scale(1.1);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #48bb78;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+        }
+        .card {
+            background: #2d3748;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .card:hover {
+            background: #4a5568;
+            transform: translateY(-5px);
+        }
+        .card.collapsed .card-content {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+        }
+        .card.expanded .card-content {
+            max-height: 500px;
+            opacity: 1;
+            padding-top: 1.5rem;
+            transition: all 0.5s ease;
+        }
+        .card-content {
+            overflow: hidden;
+            font-size: 1.25rem;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary {
+            background: #ed64a6;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #f687b3;
+        }
+        .input-field {
+            padding: 1rem;
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            background: #2d3748;
+            color: #e2e8f0;
+            width: 100%;
+            font-size: 1.25rem;
+            transition: border-color 0.2s ease;
+            direction: rtl;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #ed64a6;
+        }
+        .slide-in {
+            animation: slideInRTL 0.5s ease-out;
+        }
+        @keyframes slideInRTL {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .bounce {
+            animation: bounce 0.5s ease;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        .back-arrow {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .back-arrow:hover {
+            color: #ed64a6;
+        }
+        .telegram-link {
+            color: #38bdf8;
+            text-decoration: underline;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+            direction: rtl;
+            unicode-bidi: embed;
+        }
+        .telegram-link:hover {
+            color: #60a5fa;
+        }
+        /* Adjust icon and text alignment for RTL */
+        .card h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: space-between;
+            font-size: 1.75rem;
+        }
+        .card h2 i:first-child {
+            margin-left: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .card h2 i:last-child {
+            margin-right: auto;
+            font-size: 1.5rem;
+        }
+        .card-content p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+        .card-content p i {
+            margin-left: 0.5rem;
+            font-size: 1.5rem;
+        }
+        /* Force RTL for dynamic content */
+        .rtl-text {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Name Input Form -->
+        <div id="inputForm" class="card slide-in">
+            <h1 class="text-4xl font-bold text-center text-pink-400 mb-6">البحث حسب اسم العضو</h1>
+            <form id="memberNameForm" class="flex flex-col gap-4">
+                <input type="text" id="memberName" placeholder="أدخل اسم العضو" class="input-field" required>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search text-xl"></i> بحث عن عضو
+                </button>
+            </form>
+        </div>
+
+        <!-- Search Results -->
+        <div id="searchResults" class="hidden card slide-in">
+            <h2 class="text-3xl font-bold text-pink-400 mb-4">اختر عضوًا</h2>
+            <ul id="memberList" class="space-y-2"></ul>
+            <button id="backFromSearch" class="btn btn-primary mt-4">
+                <i class="fas fa-arrow-right text-xl"></i> رجوع
+            </button>
+        </div>
+
+        <!-- Member Dashboard -->
+        <div id="memberDashboard" class="hidden">
+            <div class="hero slide-in">
+                <i id="backArrow" class="fas fa-arrow-right back-arrow"></i>
+                <div class="avatar mx-auto mb-4 bounce" id="avatar"></div>
+                <h1 id="memberNameDisplay" class="text-5xl font-bold text-white mb-2 rtl-text"></h1>
+                <div class="badge mx-auto">
+                    <i class="fas fa-star text-xl"></i>
+                    <span id="memberStatus" class="rtl-text">عضو نشط</span>
+                </div>
+            </div>
+
+            <!-- Collapsible Sections -->
+            <div class="card collapsed" data-section="personal">
+                <h2 class="text-xl font-semibold">
+                    تفاصيل شخصية <i class="fas fa-user-circle text-pink-400"></i>
+                    <i class="fas fa-chevron-down"></i>
+                </h2>
+                <div class="card-content">
+                    <p>الجنس: <span id="memberSex" class="rtl-text"></span> <i class="fas fa-venus-mars text-gray-400"></i></p>
+                    <p>العمر: <span id="memberAge" class="rtl-text"></span> <i class="fas fa-birthday-cake text-gray-400"></i></p>
+                    <p>العنوان: <span id="memberAddress" class="rtl-text"></span> <i class="fas fa-home text-gray-400"></i></p>
+                </div>
+            </div>
+
+            <div class="card collapsed" data-section="contact">
+                <h2 class="text-xl font-semibold">
+                    معلومات الاتصال <i class="fas fa-phone-alt text-pink-400"></i>
+                    <i class="fas fa-chevron-down"></i>
+                </h2>
+                <div class="card-content">
+                    <p>الهاتف: <span id="memberPhone" class="rtl-text"></span> <i class="fas fa-mobile-alt text-gray-400"></i></p>
+                    <p>معرف تيليجرام: <a id="memberTelegram" class="telegram-link" target="_blank"></a> <i class="fas fa-paper-plane text-gray-400"></i></p>
+                    <p>البريد الإلكتروني: <span id="memberEmail" class="rtl-text"></span> <i class="fas fa-envelope text-gray-400"></i></p>
+                    <p>اسم مستخدم تيليجرام: <span id="memberTelegramUsername" class="rtl-text"></span> <i class="fas fa-at text-gray-400"></i></p>
+                </div>
+            </div>
+
+            <div class="card collapsed" data-section="professional">
+                <h2 class="text-xl font-semibold">
+                    تفاصيل مهنية <i class="fas fa-briefcase text-pink-400"></i>
+                    <i class="fas fa-chevron-down"></i>
+                </h2>
+                <div class="card-content">
+                    <p>الكلية: <span id="memberCollege" class="rtl-text"></span> <i class="fas fa-university text-gray-400"></i></p>
+                    <p>يعمل حتى: <span id="memberWorkingUntil" class="rtl-text"></span> <i class="fas fa-calendar-times text-gray-400"></i></p>
+                    <p>تاريخ الانضمام: <span id="memberJoinDate" class="rtl-text"></span> <i class="fas fa-calendar-check text-gray-400"></i></p>
+                    <p>حالة المراجعة: <span id="memberRevision" class="rtl-text"></span> <i class="fas fa-sync-alt text-gray-400"></i></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Area -->
+        <div id="message" class="text-center mt-4 hidden slide-in"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:8000/api/members/';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputForm = document.getElementById('inputForm');
+            const searchResults = document.getElementById('searchResults');
+            const memberDashboard = document.getElementById('memberDashboard');
+            const messageDiv = document.getElementById('message');
+
+            // Handle Name Search Submission
+            document.getElementById('memberNameForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const memberName = document.getElementById('memberName').value.trim();
+
+                if (!memberName) {
+                    showMessage('يرجى إدخال اسم العضو', 'text-red-400');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${API_URL}?search=${encodeURIComponent(memberName)}`, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    if (!response.ok) throw new Error(`فشل البحث بحالة ${response.status}`);
+                    const members = await response.json();
+                    handleSearchResults(members);
+                } catch (error) {
+                    showMessage(`خطأ: ${error.message}`, 'text-red-400');
+                }
+            });
+
+            // Handle Search Results
+            function handleSearchResults(members) {
+                const memberList = document.getElementById('memberList');
+                memberList.innerHTML = '';
+
+                if (!members || members.length === 0) {
+                    showMessage('لم يتم العثور على أعضاء', 'text-red-400');
+                    return;
+                } else if (members.length === 1) {
+                    displayMember(members[0]);
+                    inputForm.classList.add('hidden');
+                    memberDashboard.classList.remove('hidden');
+                } else {
+                    members.forEach(member => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<strong>${member.name}</strong> - ${member.email || 'لا يوجد بريد إلكتروني'} - ${member.phone_number || 'لا يوجد هاتف'}`;
+                        li.classList.add('cursor-pointer', 'hover:text-pink-400');
+                        li.addEventListener('click', () => {
+                            displayMember(member);
+                            searchResults.classList.add('hidden');
+                            memberDashboard.classList.remove('hidden');
+                        });
+                        memberList.appendChild(li);
+                    });
+                    inputForm.classList.add('hidden');
+                    searchResults.classList.remove('hidden');
+                }
+            }
+
+            // Display Member Details
+            function displayMember(member) {
+                const initials = member.name ? member.name.split(' ').map(n => n[0]).join('') : '??';
+                document.getElementById('avatar').innerHTML = initials.toUpperCase();
+                document.getElementById('memberNameDisplay').textContent = member.name || 'عضو غير معروف';
+                document.getElementById('memberStatus').textContent = member.is_revision ? 'في المراجعة' : 'عضو نشط';
+                document.getElementById('memberSex').textContent = member.sex === 'M' ? '\u2068ذكر\u2069' : '\u2068أنثى\u2069'; // Translated to Arabic
+                document.getElementById('memberAge').textContent = member.age ? `\u2068${member.age.toLocaleString('ar-EG')}\u2069` : 'غير متوفر'; // Arabic numerals
+                document.getElementById('memberAddress').textContent = member.address ? `\u2068${member.address}\u2069` : 'غير متوفر';
+                document.getElementById('memberPhone').textContent = member.phone_number ? `\u2068${member.phone_number}\u2069` : 'غير متوفر';
+                
+                const telegramLink = document.getElementById('memberTelegram');
+                if (member.telegram_id) {
+                    telegramLink.textContent = `\u2068${member.telegram_id}\u2069`;
+                    telegramLink.href = `https://t.me/${member.telegram_id.replace('@', '')}`;
+                } else {
+                    telegramLink.textContent = 'غير متوفر';
+                    telegramLink.removeAttribute('href');
+                }
+
+                document.getElementById('memberEmail').textContent = member.email ? `\u2068${member.email}\u2069` : 'غير متوفر';
+                document.getElementById('memberTelegramUsername').textContent = member.telgram_username ? `\u2068${member.telgram_username}\u2069` : 'غير متوفر';
+                document.getElementById('memberCollege').textContent = member.colleage ? `\u2068${member.colleage}\u2069` : 'غير متوفر';
+                document.getElementById('memberWorkingUntil').textContent = member.working_untill ? `\u2068${new Date(member.working_untill).toLocaleDateString('ar-EG')}\u2069` : 'غير متوفر'; // Arabic date
+                document.getElementById('memberJoinDate').textContent = member.date_of_join ? `\u2068${new Date(member.date_of_join).toLocaleDateString('ar-EG')}\u2069` : 'غير متوفر'; // Arabic date
+                document.getElementById('memberRevision').textContent = member.is_revision !== null ? (member.is_revision ? 'نعم' : 'لا') : 'غير متوفر';
+                setupCardInteractions();
+            }
+
+            // Card Click to Expand/Collapse
+            function setupCardInteractions() {
+                document.querySelectorAll('.card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        card.classList.toggle('collapsed');
+                        card.classList.toggle('expanded');
+                    });
+                });
+            }
+
+            // Show Message
+            function showMessage(message, colorClass) {
+                messageDiv.textContent = message;
+                messageDiv.classList.remove('hidden', 'text-red-400', 'text-green-400');
+                messageDiv.classList.add(colorClass);
+                setTimeout(() => messageDiv.classList.add('hidden'), 4000);
+            }
+
+            // Back from Search Results
+            document.getElementById('backFromSearch').addEventListener('click', () => {
+                searchResults.classList.add('hidden');
+                inputForm.classList.remove('hidden');
+                document.getElementById('memberName').value = '';
+            });
+
+            // Back from Member Dashboard with Back Arrow
+            document.getElementById('backArrow').addEventListener('click', () => {
+                memberDashboard.classList.add('hidden');
+                inputForm.classList.remove('hidden');
+                document.getElementById('memberName').value = '';
+            });
+        });
+    </script>
+</body>
+</html>

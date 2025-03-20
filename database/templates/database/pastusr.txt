@@ -1,0 +1,13 @@
+{%for pay in pay%}
+
+    {%if not pay.is_paied%}
+    {%ifchanged pay.membership.year%}
+          <hr><li style="list-style: none;">{{pay.membership.year}}</li>
+        {%endifchanged%}
+            <li style="list-style: none; display: inline;">{{pay.month}}</li>
+        </ul> </li>  
+    </ul>
+    
+    {%endif%}
+    
+{%endfor%}

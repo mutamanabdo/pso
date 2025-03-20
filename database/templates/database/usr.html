@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body >
+    {%for abc in abc%}
+        <tr>{{abc.name}}-{{abc.sex}}
+    {%endfor%}
+</tr><br>
+
+<div>
+
+  {%for pay in pay%}
+  {%ifchanged pay.membership.year%}<table>
+    {%endifchanged%}
+  <head>
+    <th>
+      {{pay.month}}
+    </th>
+  </head></table>
+  {%endfor%}
+
+</div>
+
+
+<table>
+    <thead>
+      <tr>
+        
+        {% for month in months %}
+          <th>{{ month }}</th>
+        {% endfor %}
+        <th>years</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for year in years %}
+        <tr>
+            
+        </tr>
+        <tr>
+          {% for month in months %}
+            <td>{% if subscription.is_paied %}Yes{% else %}No{% endif %}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
