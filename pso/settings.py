@@ -1,3 +1,5 @@
+import os
+import dj_database_url
 """
 Django settings for pso project.
 
@@ -22,12 +24,12 @@ se('tomato').as_sql
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--88_22zg7o6fgt=kl-_u%o^k6_p@&2k(*gqxp@r-^troxfk3-#'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1','192.168.1.11','4c3d-197-54-161-75.ngrok-free.app']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -61,7 +63,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     
     'django.middleware.security.SecurityMiddleware',
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -120,18 +122,7 @@ INTERNAL_IPS=[
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': BASE_DIR / 'db.sqlite3',
-    }
-    #   'default': {
-    #      'ENGINE': 'django.db.backends.postgresql',
-    #      'NAME': 'djangodb',
-    #      'USER':'mutaman',
-    #      'PASSWORD':'nothing',
-    #      'HOST':'127.0.0.1',
-    #      'PORT':'5432'
-    #  }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 
