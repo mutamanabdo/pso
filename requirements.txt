@@ -5,3 +5,4 @@ djangorestframework    # For rest_framework
 django-filter          # For django_filters
 django-import-export   # For import_export
 psycopg2               # For PostgreSQL support with django.contrib.postgres
+gunicorn==23.0.0
