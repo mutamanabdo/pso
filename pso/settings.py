@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     # 'debug_toolbar',
     'corsheaders',
     'database',
-    'chat',
 #    'request',
     'channels',
     'rest_framework',
