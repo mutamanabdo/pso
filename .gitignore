@@ -7,8 +7,6 @@ logfile
 theme
 ls.text
 db
-static
-static/*
 migrations
 migrations/*
 database/admin.txt
