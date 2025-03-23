@@ -7,3 +7,4 @@ django-import-export   # For import_export
 psycopg2               # For PostgreSQL support with django.contrib.postgres
 gunicorn==23.0.0
 dj-database-url
+whitenoise
