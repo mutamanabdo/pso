@@ -200,5 +200,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     "https://pso-uxd158xf.b4a.run",
-    "https://pso-6cn.pages.dev"
+    "ed84ae67.pso-6cn.pages.dev"
 ]
