@@ -1,10 +1,36 @@
-django==5.1.7          # Replace with your actual Django version
-django-cors-headers    # For corsheaders
-channels               # For channels
-djangorestframework    # For rest_framework
-django-filter          # For django_filters
-django-import-export   # For import_export
-psycopg2               # For PostgreSQL support with django.contrib.postgres
+asgiref==3.8.1
+awsebcli==3.21.0
+blessed==1.20.0
+botocore==1.35.99
+cement==2.10.14
+certifi==2025.1.31
+channels==4.2.0
+charset-normalizer==3.4.1
+colorama==0.4.6
+diff-match-patch==20241021
+dj-database-url==2.3.0
+Django==5.1.7
+django-cors-headers==4.7.0
+django-filter==25.1
+django-import-export==4.3.7
+djangorestframework==3.15.2
 gunicorn==23.0.0
-dj-database-url
-whitenoise
+idna==3.10
+jmespath==1.0.1
+packaging==24.2
+pathspec==0.10.1
+psycopg2==2.9.10
+python-dateutil==2.9.0.post0
+python-dotenv==1.1.0
+PyYAML==6.0.2
+requests==2.32.3
+semantic-version==2.10.0
+setuptools==78.1.0
+six==1.17.0
+sqlparse==0.5.3
+tablib==3.8.0
+termcolor==2.5.0
+typing_extensions==4.13.0
+urllib3==1.26.20
+wcwidth==0.2.13
+whitenoise==6.9.0
