@@ -32,7 +32,7 @@ SECRET_KEY = "f"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1","pso-uxd158xf.b4a.run"]
 
 
 # Application definition
