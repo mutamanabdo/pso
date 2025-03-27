@@ -27,13 +27,14 @@ se('tomato').as_sql
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "f"
+SECRET_KEY = os.environ.get("SECERT_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ["127.0.0.1","pso-uxd158xf.b4a.run"]
 
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -199,4 +200,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     "https://pso-uxd158xf.b4a.run",
+    "https://pso-6cn.pages.dev"
 ]
