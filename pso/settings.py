@@ -197,3 +197,6 @@ REQUEST_IGNORE_PATHS = (
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
 ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://pso-uxd158xf.b4a.run",
+]
