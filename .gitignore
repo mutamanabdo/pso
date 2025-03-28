@@ -15,5 +15,5 @@ database/views.txt
 database/models.txt 
  
 **/__pycache__/
-
+__pycache__/
 *.pyc
