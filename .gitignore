@@ -14,4 +14,6 @@ database/ob.py
 database/views.txt
 database/models.txt 
  
+**/__pycache__/
 
+*.pyc
