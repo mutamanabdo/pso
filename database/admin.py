@@ -12,7 +12,7 @@ class MemberAdmin(admin.ModelAdmin):
             'fields': ('name', 'sex', 'age', 'email')
         }),
         ('Contact Info', {
-            'fields': ('phone_number', 'telegram_id', 'telgram_username')
+            'fields': ('phone_number', 'telegram_id')
         }),
         ('Other Details', {
             'fields': ('address', 'colleage', 'working_untill', 'date_of_join', 'is_revision')

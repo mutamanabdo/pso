@@ -56,11 +56,7 @@ class Member(models.Model):
         max_length=254,
         verbose_name='البريد الإلكتروني'
     )
-    telgram_username = models.CharField(
-        max_length=200,
-        verbose_name='اسم مستخدم التلقرام'
-    )
 
     class Meta:
         verbose_name = 'عضو'
-        verbose_name_plural = 'الأع'
+        verbose_name_plural = 'الاعضاء'
