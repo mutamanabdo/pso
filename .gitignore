@@ -13,5 +13,13 @@ database/admin.txt
 database/ob.py 
 database/views.txt
 database/models.txt 
+<<<<<<< HEAD
 .env
 
+=======
+ 
+**/__pycache__/
+__pycache__/
+*.pyc
+db.sqlite3
+>>>>>>> dev
