@@ -122,18 +122,19 @@ INTERNAL_IPS=[
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Specifies the database backend (SQLite in this case)
         'NAME': BASE_DIR / 'db.sqlite3',         # Path to the SQLite database file
     }
 }
-"""
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -203,3 +204,11 @@ REQUEST_IGNORE_PATHS = (
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.sendinblue.com'  # Brevo SMTP server
+EMAIL_PORT = 587  # Use 465 for SSL, 587 for TLS
+EMAIL_USE_TLS = True  # Use TLS for security
+EMAIL_HOST_USER ='896b18001@smtp-brevo.com'  # Your Brevo account email
+EMAIL_HOST_PASSWORD = 'jyWw8p7S29UvfDq0'  # Your Brevo SMTP key
+DEFAULT_FROM_EMAIL = 'bablo@pso-uxd158xf.b4a.run'  # Default sender email
