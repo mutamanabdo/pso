@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECERT_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ["127.0.0.1","pso-uxd158xf.b4a.run"]
+ALLOWED_HOSTS = ["127.0.0.1","pso-uxd158xf.b4a.run","pso-oiog1orq.b4a.run"]
 
 CSRF_COOKIE_SECURE = True
 
@@ -204,9 +204,13 @@ REQUEST_IGNORE_PATHS = (
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'https://ed84ae67.pso-6cn.pages.dev',
-    'https://pso-6cn.pages.dev'
+    'https://pso-6cn.pages.dev',
+    'pso-oiog1orq.b4a.run',
 ]
 CSRF_TRUSTED_ORIGINS = [
     "https://pso-uxd158xf.b4a.run",
     "https://ed84ae67.pso-6cn.pages.dev"
 ]
+
+RESEARCH4LIFE_USERNAME = os.getenv('R4L_USERNAME')
+RESEARCH4LIFE_PASSWORD = os.getenv('R4L_PASSWORD')

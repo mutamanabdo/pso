@@ -4,6 +4,20 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Member
 from .serializers import MemberSerializer
 from rest_framework.filters import SearchFilter
+import requests
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+
+#custom automatic r4l login
+@login_required(login_url='/admin/login/')  # Redirect to admin login if not authenticated
+def research4life_access(request):
+    context = {
+        'username': settings.RESEARCH4LIFE_USERNAME,
+        'password': settings.RESEARCH4LIFE_PASSWORD,
+        'login_url': 'https://login.research4life.org/tacgw/login.cshtml',
+    }
+    return render(request, 'research4life_auto_login.html', context)
 
 # Custom Pagination Class
 class MemberListView(generics.ListAPIView):
