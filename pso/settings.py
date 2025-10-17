@@ -210,7 +210,7 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://pso-uxd158xf.b4a.run",
     "https://ed84ae67.pso-6cn.pages.dev",
-    "pso-oiog1orq.b4a.run"
+    "https://pso-oiog1orq.b4a.run"
 ]
 
 RESEARCH4LIFE_USERNAME = os.getenv('R4L_USERNAME')
