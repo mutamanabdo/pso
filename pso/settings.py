@@ -201,12 +201,7 @@ REQUEST_IGNORE_PATHS = (
     r'^admin/request',
     r'^admin/jsi18n'
 )
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8080',
-    'https://ed84ae67.pso-6cn.pages.dev',
-    'https://pso-6cn.pages.dev',
-    'pso-oiog1orq.b4a.run',
-]
-CSRF_TRUSTED_ORIGINS = os.getenv('ORIGINS').split(',')
+CORS_ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('TRUSTED_ORIGINS').split(',')
 RESEARCH4LIFE_USERNAME = os.getenv('R4L_USERNAME')
 RESEARCH4LIFE_PASSWORD = os.getenv('R4L_PASSWORD')
